@@ -773,8 +773,11 @@
 	//  $config['board_path'] if you wish to change the URL.
 	$config['board_abbreviation'] = '/%s/';
 
-	// The default name (ie. Anonymous).
-	$config['anonymous'] = 'Anonymous';
+	//  Define a set of various names that the system will choose from to assign a poster if they do not fill out their own
+	//  Example: 
+	//  	$give_poster_random_name = array('Anonymous', 'Billy', 'Wendy', 'Bob');
+	$give_poster_random_name = array('Anonymous');
+	$config['anonymous'] = $give_poster_random_name[array_rand($give_poster_random_name)];
 
 	// Number of reports you can create at once.
 	$config['report_limit'] = 3;

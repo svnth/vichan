@@ -579,10 +579,15 @@
  * ====================
  */
 
-	// "Wiki" markup syntax ($config['wiki_markup'] in pervious versions):
-	$config['markup'][] = array("/'''(.+?)'''/", "<strong>\$1</strong>");
-	$config['markup'][] = array("/''(.+?)''/", "<em>\$1</em>");
-	$config['markup'][] = array("/\*\*(.+?)\*\*/", "<span class=\"spoiler\">\$1</span>");
+	// Reddit markup syntax ($config['wiki_markup'] in pervious versions):
+	// **bold**, *italic*, :spoiler:, ~~strikethrough~~, [link name](http://url.tld)
+	// Note: URL markup WILL NOT WORK if $config['markup_urls'] = true;. 
+	// (markup_urls will break the HTML output)
+	$config['markup'][] = array("/\*\*(.+?)\*\*/", "<strong>\$1</strong>");
+	$config['markup'][] = array("/\*(.+?)\*/", "<em>\$1</em>");
+	$config['markup'][] = array("/\:(.+?)\:/", "<span class=\"spoiler\">\$1</span>");
+	$config['markup'][] = array("/\~\~(.+?)\~\~/", "<strike>\$1</strike>");
+	$config['markup'][] = array("/\[(.+?)\]\((.+?)\)/", "<a href=\"\$2\">\$1</a>");
 	$config['markup'][] = array("/^[ |\t]*==(.+?)==[ |\t]*$/m", "<span class=\"heading\">\$1</span>");
 
 	// Highlight PHP code wrapped in <code> tags (PHP 5.3+)
